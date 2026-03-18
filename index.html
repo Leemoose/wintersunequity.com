@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wintersun Equity — Acquiring and Operating Exceptional Businesses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+
+        /* ─── RESET & BASE ─── */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy:      #1a2e4a;
+            --navy-mid:  #243d5e;
+            --navy-light:#2e4f78;
+            --white:     #ffffff;
+            --off-white: #f8f8f6;
+            --light-gray:#f2f2f0;
+            --mid-gray:  #e8e8e4;
+            --text:      #2c2c2c;
+            --text-mid:  #555555;
+            --text-light:#888888;
+            --serif:     'Playfair Display', Georgia, serif;
+            --sans:      'Inter', system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+        /* ─── NAVIGATION ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(26, 46, 74, 0.08);
+            transition: height 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            height: 62px;
+            box-shadow: 0 2px 20px rgba(26, 46, 74, 0.08);
+        }
+
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 2.8rem;
+        }
+
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--navy);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--navy);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--navy);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2070&q=85');
+            background-size: cover;
+            background-position: center 40%;
+            background-repeat: no-repeat;
+            transform: scale(1.04);
+            transition: transform 8s ease;
+        }
+
+        .hero.loaded .hero-bg {
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(16, 28, 45, 0.74) 0%,
+                rgba(16, 28, 45, 0.45) 55%,
+                rgba(16, 28, 45, 0.10) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 6%;
+            max-width: 820px;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.6rem;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 600;
+            line-height: 1.12;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.82);
+            max-width: 500px;
+            line-height: 1.75;
+            margin-bottom: 2.8rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--white);
+            color: var(--navy);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1rem 2.4rem;
+            border: 1px solid var(--white);
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+            animation: scrollPulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.7; transform: scaleY(1.15); }
+        }
+
+
+        /* ─── SHARED LAYOUT ─── */
+        .section-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 6%;
+        }
+
+        section {
+            padding: 8rem 0;
+        }
+
+        .section-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--navy);
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.18;
+            color: var(--navy);
+            margin-bottom: 1.4rem;
+        }
+
+        .section-body {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.8;
+        }
+
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: var(--navy);
+            margin-bottom: 1.6rem;
+        }
+
+
+        /* ─── OVERVIEW ─── */
+        #overview {
+            background: var(--white);
+        }
+
+        .overview-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7rem;
+            align-items: center;
+        }
+
+        .overview-text .section-body {
+            margin-bottom: 0;
+        }
+
+        .overview-stat-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--mid-gray);
+            border: 1px solid var(--mid-gray);
+        }
+
+        .overview-stat {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+        }
+
+        .overview-stat-num {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .overview-stat-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+
+        /* ─── APPROACH ─── */
+        #approach {
+            background: var(--off-white);
+        }
+
+        .approach-header {
+            max-width: 600px;
+            margin-bottom: 5rem;
+        }
+
+        .approach-cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--mid-gray);
+            border: 1px solid var(--mid-gray);
+        }
+
+        .approach-col {
+            background: var(--white);
+            padding: 3.5rem 3rem;
+            position: relative;
+        }
+
+        .approach-col::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 3rem;
+            right: 3rem;
+            height: 2px;
+            background: var(--navy);
+        }
+
+        .approach-num {
+            font-family: var(--serif);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--mid-gray);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .approach-col h3 {
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            line-height: 1.25;
+        }
+
+        .approach-col p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.8;
+        }
+
+
+        /* ─── CRITERIA ─── */
+        #criteria {
+            background: var(--white);
+        }
+
+        .criteria-layout {
+            display: grid;
+            grid-template-columns: 5fr 7fr;
+            gap: 7rem;
+            align-items: start;
+        }
+
+        .criteria-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        .criteria-table tr {
+            border-bottom: 1px solid var(--mid-gray);
+        }
+
+        .criteria-table tr:first-child {
+            border-top: 1px solid var(--mid-gray);
+        }
+
+        .criteria-table td {
+            padding: 1.3rem 0;
+            vertical-align: top;
+        }
+
+        .criteria-table td:first-child {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            width: 40%;
+            padding-right: 2rem;
+        }
+
+        .criteria-table td:last-child {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--navy);
+        }
+
+        .criteria-note {
+            margin-top: 2.5rem;
+            padding: 1.8rem 2rem;
+            background: var(--navy);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        .criteria-note strong {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+
+        /* ─── TEAM ─── */
+        #team {
+            background: var(--off-white);
+        }
+
+        .team-layout {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 5rem;
+            align-items: start;
+            max-width: 860px;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--mid-gray);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .team-avatar svg {
+            width: 64px;
+            height: 64px;
+            color: var(--text-light);
+        }
+
+        .team-name {
+            font-family: var(--serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .team-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1.6rem;
+        }
+
+        .team-bio {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.85;
+        }
+
+
+        /* ─── CONTACT ─── */
+        #contact {
+            background: var(--navy);
+        }
+
+        #contact .section-label {
+            color: rgba(255,255,255,0.5);
+        }
+
+        #contact .section-title {
+            color: var(--white);
+        }
+
+        #contact .divider {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7rem;
+            align-items: start;
+        }
+
+        .contact-body {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 2.8rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            padding-bottom: 0.2rem;
+            transition: border-color 0.25s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--white);
+        }
+
+        .contact-right {
+            padding-top: 0.5rem;
+        }
+
+        .contact-detail {
+            margin-bottom: 3rem;
+        }
+
+        .contact-detail-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.7rem;
+        }
+
+        .contact-detail-value {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+        }
+
+        .contact-detail-value a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            transition: border-color 0.25s ease;
+        }
+
+        .contact-detail-value a:hover {
+            border-color: rgba(255,255,255,0.7);
+        }
+
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #101e30;
+            padding: 2.8rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer-logo {
+            font-family: var(--serif);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-nav a {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .footer-nav a:hover {
+            color: rgba(255,255,255,0.7);
+        }
+
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background: var(--white);
+                border-top: 1px solid var(--mid-gray);
+                padding: 1rem 0 1.5rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.85rem 6%;
+                font-size: 0.82rem;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .overview-layout,
+            .criteria-layout,
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .overview-stat-group {
+                max-width: 500px;
+            }
+
+            .approach-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .team-layout {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-nav {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 5.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .overview-stat-group {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .criteria-layout {
+                gap: 3rem;
+            }
+
+            footer {
+                padding: 2rem 6%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">WINTERSUN EQUITY</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#criteria">Criteria</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span class="hero-eyebrow">Search Fund &nbsp;&mdash;&nbsp; Manufacturing &amp; Industrial</span>
+        <h1>Acquiring and Operating<br><em>Exceptional Businesses</em></h1>
+        <p class="hero-sub">A search fund focused on acquiring owner-operated businesses in manufacturing and industrial sectors across the United States.</p>
+        <a href="#contact" class="hero-cta">Get in Touch</a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+    </div>
+</section>
+
+
+<!-- ─── OVERVIEW ─── -->
+<section id="overview">
+    <div class="section-inner">
+        <div class="overview-layout">
+            <div class="overview-text reveal">
+                <p class="section-label">Overview</p>
+                <div class="divider"></div>
+                <h2 class="section-title">A Long-Term Partner for Owner-Operators</h2>
+                <p class="section-body">Wintersun Equity is a search fund focused on acquiring and operating established, owner-operated manufacturing and industrial businesses in the United States. We seek companies with durable competitive advantages and strong operational foundations, partnering with sellers who want their legacy — their people, their culture, their craft — preserved and grown for the long term.</p>
+            </div>
+            <div class="overview-stat-group reveal reveal-delay-2">
+                <div class="overview-stat">
+                    <span class="overview-stat-num">$1M–$10M</span>
+                    <span class="overview-stat-label">Deal Size</span>
+                </div>
+                <div class="overview-stat">
+                    <span class="overview-stat-num">4 Cities</span>
+                    <span class="overview-stat-label">Target Markets</span>
+                </div>
+                <div class="overview-stat">
+                    <span class="overview-stat-num">1</span>
+                    <span class="overview-stat-label">Acquisition Target</span>
+                </div>
+                <div class="overview-stat">
+                    <span class="overview-stat-num">Owner-Led</span>
+                    <span class="overview-stat-label">Post-Close Model</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─── APPROACH ─── -->
+<section id="approach">
+    <div class="section-inner">
+        <div class="approach-header reveal">
+            <p class="section-label">Our Approach</p>
+            <div class="divider"></div>
+            <h2 class="section-title">How We Think About Acquiring Businesses</h2>
+        </div>
+        <div class="approach-cols">
+            <div class="approach-col reveal">
+                <span class="approach-num">01</span>
+                <h3>Patient Capital</h3>
+                <p>We are not a fund with a forced exit horizon. Wintersun Equity takes a long-term ownership perspective, allowing us to invest in a business's future without pressure to flip. Our capital is patient, and our commitment to the companies we acquire is permanent.</p>
+            </div>
+            <div class="approach-col reveal reveal-delay-1">
+                <span class="approach-num">02</span>
+                <h3>Operational Focus</h3>
+                <p>As an operator-buyer, we plan to be actively involved in running and improving the businesses we acquire. We are not passive investors — we bring hands-on management, operational discipline, and a genuine commitment to making the business better every year.</p>
+            </div>
+            <div class="approach-col reveal reveal-delay-2">
+                <span class="approach-num">03</span>
+                <h3>Owner Partnership</h3>
+                <p>We understand that selling a business is one of the most significant decisions an owner will make. We approach every conversation with respect and transparency, working closely with sellers to structure transitions that honor what they have built and the people who depend on it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─── CRITERIA ─── -->
+<section id="criteria">
+    <div class="section-inner">
+        <div class="criteria-layout">
+            <div class="reveal">
+                <p class="section-label">Acquisition Criteria</p>
+                <div class="divider"></div>
+                <h2 class="section-title">What We Are Looking For</h2>
+                <p class="section-body" style="font-size:0.95rem;">We focus on profitable, established businesses where an owner is ready for the next chapter. If this sounds like your situation, we would enjoy a confidential conversation.</p>
+                <div class="criteria-note" style="margin-top:2.5rem;">
+                    <strong>No business broker required.</strong> We work directly with owners and their advisors. All conversations are strictly confidential.
+                </div>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <table class="criteria-table">
+                    <tbody>
+                        <tr>
+                            <td>Industry</td>
+                            <td>Manufacturing, Industrial, Business Services</td>
+                        </tr>
+                        <tr>
+                            <td>Geography</td>
+                            <td>Philadelphia, Pittsburgh, Denver, San Diego</td>
+                        </tr>
+                        <tr>
+                            <td>Revenue</td>
+                            <td>$2M &ndash; $15M annually</td>
+                        </tr>
+                        <tr>
+                            <td>EBITDA</td>
+                            <td>$500K &ndash; $3M</td>
+                        </tr>
+                        <tr>
+                            <td>Deal Type</td>
+                            <td>Owner-operated businesses seeking succession</td>
+                        </tr>
+                        <tr>
+                            <td>History</td>
+                            <td>Established operations, 5+ years preferred</td>
+                        </tr>
+                        <tr>
+                            <td>Employees</td>
+                            <td>Existing team that will remain post-close</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─── TEAM ─── -->
+<section id="team">
+    <div class="section-inner">
+        <p class="section-label reveal">Team</p>
+        <div class="divider reveal"></div>
+        <div class="team-layout reveal">
+            <div class="team-avatar" aria-label="Headshot placeholder for Connor Leemhuis">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="32" cy="24" r="13" fill="#cccccc"/>
+                    <ellipse cx="32" cy="58" rx="22" ry="14" fill="#cccccc"/>
+                </svg>
+            </div>
+            <div class="team-info">
+                <h3 class="team-name">Connor Leemhuis</h3>
+                <p class="team-title">Founder &amp; Managing Director</p>
+                <p class="team-bio">Connor is an acquisition entrepreneur with a background in finance and business operations. Prior to founding Wintersun Equity, he developed deep expertise in financial analysis, deal structuring, and operational management through graduate-level coursework in entrepreneurship through acquisition and hands-on work across multiple industries. He founded Wintersun Equity to acquire and operate a single exceptional business, with an unwavering commitment to the company's employees, customers, and long-term success.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+    <div class="section-inner">
+        <div class="contact-layout">
+            <div class="reveal">
+                <p class="section-label">Contact</p>
+                <div class="divider"></div>
+                <h2 class="section-title">Let&rsquo;s Connect</h2>
+                <p class="contact-body">Whether you are a business owner considering your options, an advisor with a client in transition, or an investor interested in learning more about Wintersun Equity — we welcome your outreach. Every conversation is completely confidential.</p>
+                <a href="mailto:connor@wintersunequity.com" class="contact-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    connor@wintersunequity.com
+                </a>
+            </div>
+            <div class="contact-right reveal reveal-delay-1">
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Email</p>
+                    <p class="contact-detail-value"><a href="mailto:connor@wintersunequity.com">connor@wintersunequity.com</a></p>
+                </div>
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Target Markets</p>
+                    <p class="contact-detail-value">Philadelphia &nbsp;&middot;&nbsp; Pittsburgh<br>Denver &nbsp;&middot;&nbsp; San Diego</p>
+                </div>
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Focus</p>
+                    <p class="contact-detail-value">Manufacturing, Industrial &amp; Business Services</p>
+                </div>
+                <div class="contact-detail">
+                    <p class="contact-detail-label">Deal Size</p>
+                    <p class="contact-detail-value">$1M &ndash; $10M</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="footer-logo">WINTERSUN EQUITY</div>
+    <ul class="footer-nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#criteria">Criteria</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Wintersun Equity. All rights reserved.</p>
+</footer>
+
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+    // Sticky nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }, { passive: true });
+
+    // Mobile hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', function() {
+        const isOpen = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Hero subtle zoom-in on load
+    window.addEventListener('load', function() {
+        document.getElementById('hero').classList.add('loaded');
+    });
+
+    // Scroll reveal
+    var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+        revealObserver.observe(el);
+    });
+</script>
+
+</body>
+</html>
